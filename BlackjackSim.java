@@ -76,10 +76,13 @@ public class BlackjackSim extends Simulator {
         boolean hasDecided = false;
         do {
             System.out
-                    .print("Player " + player.getNumber() + " place your bets. $" + player.getCash().getCash() + " remaining: ");
+                    .print("Player " + player.getNumber() + " place your bets. $" + player.getCash().getCash() + " remaining. Type (max) for max bet: ");
             String input = scanner.nextLine().trim().toLowerCase();
             if (input.matches("-?\\d+") && Integer.valueOf(input) <= player.getCash().getCash() && Integer.valueOf(input) > 0) {
                 player.setBet(Integer.valueOf(input));
+                hasDecided = true;
+            } else if (input.equalsIgnoreCase("max") || input.equalsIgnoreCase("m")) {
+                player.setBet(player.getCash().getCash());
                 hasDecided = true;
             } else {
                 System.out.println("Invalid amount");
